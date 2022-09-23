@@ -56,12 +56,13 @@ news_parameters = {
     "apiKey": NEWS_API_KEY,
 }
 
-response = requests.get(NEWS_ENDPOINT, params=news_parameters)
-response.raise_for_status()
-news_data = response.json()
-news_slice = news_data["articles"][:3]
-for news in news_slice:
-    sym = symbol(difference)
-    telegram_bot_sendtext(f"TSLA: {sym}{percentage}%\nHeadline: {news['title']}\n Brief: {news['description']}")
+if percentage > 5:
+    response = requests.get(NEWS_ENDPOINT, params=news_parameters)
+    response.raise_for_status()
+    news_data = response.json()
+    news_slice = news_data["articles"][:3]
+    for news in news_slice:
+        sym = symbol(difference)
+        telegram_bot_sendtext(f"TSLA: {sym}{percentage}%\nHeadline: {news['title']}\n Brief: {news['description']}")
 
 
