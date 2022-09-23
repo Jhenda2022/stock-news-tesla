@@ -48,7 +48,6 @@ closing_price_dby = float(stock_data["Time Series (Daily)"][day_before_yesterday
 
 difference = closing_price_yesterday - closing_price_dby
 percentage = abs(int((difference/closing_price_yesterday) * 100))
-print(percentage)
 
 #If increase is greater than 5%, load news data.
 news_parameters = {
