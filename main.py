@@ -62,6 +62,4 @@ if percentage > 5:
     news_slice = news_data["articles"][:3]
     for news in news_slice:
         sym = symbol(difference)
-        telegram_bot_sendtext(f"TSLA: {sym}{percentage}%\nHeadline: {news['title']}\n Brief: {news['description']}")
-
-
+        telegram_bot_sendtext(f"{STOCK_NAME}: {sym}{percentage}%\nHeadline: {news['title']}\n Brief: {news['description']}")
