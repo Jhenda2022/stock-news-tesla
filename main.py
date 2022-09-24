@@ -1,5 +1,4 @@
 import requests
-import datetime
 
 #_________________FUNCTIONS________________________________#
 def telegram_bot_sendtext(bot_message):
@@ -36,18 +35,14 @@ stock_parameters = {
 
 response = requests.get(STOCK_ENDPOINT, params=stock_parameters)
 response.raise_for_status()
-stock_data = response.json()
+stock_data = response.json()["Time Series (Daily)"]
+stock_data_list = [value for (key, value) in stock_data.items()]
 
 #Compare yesterday and day_before_yesterday's closing prices.
-today = datetime.date.today()
-yesterday = str(today - datetime.timedelta(days=1))
-closing_price_yesterday = float(stock_data["Time Series (Daily)"][yesterday]["4. close"])
-
-day_before_yesterday = str(today - datetime.timedelta(days=2))
-closing_price_dby = float(stock_data["Time Series (Daily)"][day_before_yesterday]["4. close"])
-
+closing_price_yesterday = float(stock_data_list[0]["4. close"])
+closing_price_dby = float(stock_data_list[1]["4. close"])
 difference = closing_price_yesterday - closing_price_dby
-percentage = abs(int((difference/closing_price_yesterday) * 100))
+percentage = abs(round((difference/closing_price_yesterday) * 100))
 
 #If increase is greater than 5%, load news data.
 news_parameters = {
