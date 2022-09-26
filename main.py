@@ -1,10 +1,11 @@
 import requests
+import os
 
 #_________________FUNCTIONS________________________________#
 def telegram_bot_sendtext(bot_message):
     '''Sends message through TG.'''
-    bot_token = '5740117726:AAEPxOKvfD_cYIwLc6H0RjsWUfazcXz3-jo'
-    bot_chatID = '5506904417'
+    bot_token = os.environ["BOT_TOKEN"]
+    bot_chatID = os.environ["BOT_CHAT_ID"]
     send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + \
                 '&parse_mode=Markdown&text=' + bot_message
 
@@ -21,10 +22,10 @@ def symbol(difference):
 STOCK_NAME = "TSLA"
 COMPANY_NAME = "Tesla Inc"
 STOCK_ENDPOINT = "https://www.alphavantage.co/query"
-STOCK_API_KEY = "UQODA4DL3J37VEV1"
+STOCK_API_KEY = os.environ["STOCK_API_KEY"]
 
 NEWS_ENDPOINT = "https://newsapi.org/v2/everything"
-NEWS_API_KEY = "6e8838559f86468aa8f174284b32a8a3"
+NEWS_API_KEY = os.environ["NEWS_API_KEY"]
 
 #___________________STOCK API____________________#
 stock_parameters = {
